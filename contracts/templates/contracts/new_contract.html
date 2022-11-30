@@ -1,0 +1,216 @@
+{% extends "contracts/base.html" %}
+{% load crispy_forms_tags %}
+
+{%block content%}
+
+<h2 class="p-3 text-center">NEW CONTRACT</h2>
+<div class="container" style="width: 50%;">
+    <form action="{% url 'contracts:new_contract' %}" method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">General
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button"
+                        role="tab" aria-controls="summary" aria-selected="false">Summary
+                </button>
+            </li>
+            <!--<li class="nav-item" role="presentation">
+              <button class="nav-link" id="financials-tab" data-bs-toggle="tab" data-bs-target="#financials" type="button" role="tab" aria-controls="financials" aria-selected="false">Financials</button>
+            </li>-->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">Contact
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#document" type="button"
+                        role="tab" aria-controls="document" aria-selected="false">Documents
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <br>
+                <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>
+                <br>
+                <div class="row">
+
+                    <div class="col">{{ form.tag_type|as_crispy_field }}</div>
+                    <div class="col">{{ form.contract_type|as_crispy_field }}</div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.contract_number|as_crispy_field }}</div>
+                    <div class="col">{{ form.title|as_crispy_field }}</div>
+                    <div class="col">{{ form.company_name|as_crispy_field }}</div>
+
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col">{{ form.contract_status|as_crispy_field }}</div>
+                    <div class="col">{{ form.current_year|as_crispy_field }}</div>
+                    <div class="col">{{ form.created_date|as_crispy_field }}</div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.funded|as_crispy_field }}</div>
+                    <div class="col">{{ form.total_funding|as_crispy_field }}</div>
+                    <div class="col">{{ form.current_funding|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+
+
+                         <div class="col">
+<!--                           <div class="col">-->
+<!--                            <label for="effective_date">Effective Date:</label>-->
+<!--                           </div>-->
+
+                             {{ form.effective_date|as_crispy_field }}
+
+                         </div>
+                         <div class="col">
+<!--                             <div class="col">-->
+<!--                              <label for="expiration_date">Expiration Date:</label>-->
+<!--                             </div>-->
+<!--                             <input type="date" />-->
+                              {{ form.expiration_date|as_crispy_field }}
+                         </div>
+                          <div class="col">
+<!--                              <div class="col">-->
+<!--                              <label for="renewal_date">Renewal Date:</label>-->
+<!--                              </div>-->
+<!--                              <input type="date" />-->
+                               {{ form.renewal_date|as_crispy_field }}
+                          </div>
+
+
+
+                </div>
+
+
+            </div>
+            <div class="tab-pane fade" id="summary" role="tabpanel" aria-labelledby="summary-tab">
+                <br>
+                <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>
+                <br>
+                <div class="row">
+                   <div class="col">{{ form.media }}</div>
+                   <div class="col">{{ form.short_description }}</div>
+
+                </div>
+
+
+            </div>
+            <!--<div class="tab-pane fade" id="financials" role="tabpanel" aria-labelledby="financials-tab">
+
+                        <div class="row">
+                               <div class="col">{{ form.funded|as_crispy_field }}</div>
+                               <div class="col">{{ form.total_funding|as_crispy_field }}</div>
+                                <div class="col">{{ form.current_funding|as_crispy_field }}</div>
+                           </div>
+
+
+
+            </div>-->
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <br>
+                <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>
+                <br>
+
+
+                <div class="row">
+                    <div class="col">{{ form.prime|as_crispy_field }}</div>
+                    <div class="col">{{ form.prime_pm|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.sub|as_crispy_field }}</div>
+                    <div class="col">{{ form.sub_pm|as_crispy_field }}</div>
+                </div>
+                <div class="row">
+                    <div class="col">{{ form.office|as_crispy_field }}</div>
+                    <div class="col">{{ form.division|as_crispy_field }}</div>
+
+                </div>
+                <div class="row">
+                    <div class="col">{{ form.city|as_crispy_field }}</div>
+                    <div class="col">{{ form.state|as_crispy_field }}</div>
+                    <div class="col">{{ form.zipcode|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.contact_email|as_crispy_field }}</div>
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
+                <br>
+                <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>
+                <br>
+                <div class="row">
+                    <div class="col">{{ form.contract_award|as_crispy_field }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6">{{ form.contract_amendment|as_crispy_field }}</div>
+                    <div class="col-6">{{ form.contract_renewal|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">{{ form.contract_nda|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">{{ form.main_logo|as_crispy_field }}</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container text-center p-3">
+            <button type="submit" class="btn btn-warning">Save Contract</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('.dateinput').datepicker({ format: "yyyy/mm/dd" });
+   });
+
+
+
+
+
+</script>
+{%endblock content%}  

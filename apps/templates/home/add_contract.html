@@ -1,0 +1,263 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Billing {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="container-fluid py-4">
+
+      <div class="row">
+          <div class="col-lg-8">
+              <div class="row">
+
+                  <div class="col-xl-6">
+                      <div class="row">
+
+                      </div>
+                  </div>
+                  <div class="col-md-12 mb-lg-0 mb-4">
+                      <div class="card mt-4">
+                          <div class="card-header pb-0 p-3">
+                              <div class="row">
+                                  <div class="col-6 d-flex align-items-center">
+                                      <h6 class="mb-0">New Contract Information</h6>
+                                  </div>
+                                  <div class="col-6 text-end">
+                                     <button type="submit" class="btn bg-gradient-dark mb-0">Save Contract</button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-body p-3">
+                <div class="row">
+
+<div class="container" style="width: 50%;">
+    <form action="{% url 'add_contract' %}" method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">General
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button"
+                        role="tab" aria-controls="summary" aria-selected="false">Summary
+                </button>
+            </li>
+            <!--<li class="nav-item" role="presentation">
+              <button class="nav-link" id="financials-tab" data-bs-toggle="tab" data-bs-target="#financials" type="button" role="tab" aria-controls="financials" aria-selected="false">Financials</button>
+            </li>-->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">Contact
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#document" type="button"
+                        role="tab" aria-controls="document" aria-selected="false">Documents
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+               {% comment %} <br>
+                <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>{% endcomment %}
+                <br>
+                <div class="row">
+
+                    <div class="col">{{ form.tag_type|as_crispy_field}}</div>
+                    <div class="col">{{ form.contract_type|as_crispy_field }}</div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.contract_number|as_crispy_field }}</div>
+                    <div class="col">{{ form.title|as_crispy_field }}</div>
+                    <div class="col">{{ form.company_name|as_crispy_field }}</div>
+
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col">{{ form.contract_status|as_crispy_field }}</div>
+                    <div class="col">{{ form.current_year|as_crispy_field }}</div>
+                    <div class="col">{{ form.created_date|as_crispy_field }}</div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.funded|as_crispy_field }}</div>
+                    <div class="col">{{ form.total_funding|as_crispy_field }}</div>
+                    <div class="col">{{ form.current_funding|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+
+
+                         <div class="col">
+<!--                           <div class="col">-->
+<!--                            <label for="effective_date">Effective Date:</label>-->
+<!--                           </div>-->
+
+                             {{ form.effective_date|as_crispy_field }}
+
+                         </div>
+                         <div class="col">
+<!--                             <div class="col">-->
+<!--                              <label for="expiration_date">Expiration Date:</label>-->
+<!--                             </div>-->
+<!--                             <input type="date" />-->
+                              {{ form.expiration_date|as_crispy_field }}
+                         </div>
+                          <div class="col">
+<!--                              <div class="col">-->
+<!--                              <label for="renewal_date">Renewal Date:</label>-->
+<!--                              </div>-->
+<!--                              <input type="date" />-->
+                               {{ form.renewal_date|as_crispy_field }}
+                          </div>
+
+
+
+                </div>
+
+
+            </div>
+            <div class="tab-pane fade" id="summary" role="tabpanel" aria-labelledby="summary-tab">
+                <br>
+               {% comment %} <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>
+                <br>{% endcomment %}
+                <div class="row">
+                  <div class="col">{{ form.media }}</div>
+                   <div class="col">{{ form.short_description|as_crispy_field }}</div>
+
+                </div>
+
+
+            </div>
+            <!--<div class="tab-pane fade" id="financials" role="tabpanel" aria-labelledby="financials-tab">
+
+                        <div class="row">
+                               <div class="col">{{ form.funded|as_crispy_field }}</div>
+                               <div class="col">{{ form.total_funding|as_crispy_field }}</div>
+                                <div class="col">{{ form.current_funding|as_crispy_field }}</div>
+                           </div>
+
+
+
+            </div>-->
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              {% comment %}  <br>
+                <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>{% endcomment %}
+                <br>
+
+
+                <div class="row">
+                    <div class="col">{{ form.prime|as_crispy_field }}</div>
+                    <div class="col">{{ form.prime_pm|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.sub|as_crispy_field }}</div>
+                    <div class="col">{{ form.sub_pm|as_crispy_field }}</div>
+                </div>
+                <div class="row">
+                    <div class="col">{{ form.office|as_crispy_field }}</div>
+                    <div class="col">{{ form.division|as_crispy_field }}</div>
+
+                </div>
+                <div class="row">
+                    <div class="col">{{ form.city|as_crispy_field }}</div>
+                    <div class="col">{{ form.state|as_crispy_field }}</div>
+                    <div class="col">{{ form.zipcode|as_crispy_field }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">{{ form.contact_email|as_crispy_field }}</div>
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
+                <br>
+              {% comment %}  <details>
+                    <summary>Description</summary>
+                    <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international
+                        pavilions, award-winning fireworks and seasonal special events.</p>
+                </details>
+                <br>{% endcomment %}
+
+
+                <div class="row">
+                    <div class="col-6">{{ form.main_logo|as_crispy_field }}</div>
+                </div>
+
+            </div>
+        </div>
+
+
+      <div class="container text-center p-3">
+            <button type="submit" class="btn bg-gradient-dark mb-0">Save Contract</button>
+        </div>
+    </form>
+</div>
+
+                </div>
+
+                  <div class="row">
+
+                </div>
+
+                  <div class="row">
+                  <div class="col-md-6 mb-md-0 mb-4">
+
+                  </div>
+                  <div class="col-md-6">
+
+                  </div>
+
+                      <div class="col-md-6">
+
+                  </div>
+                        <div class="col-md-6">
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {% include "includes/footer.html" %}
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

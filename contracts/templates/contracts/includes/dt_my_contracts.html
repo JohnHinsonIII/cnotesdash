@@ -1,0 +1,117 @@
+<!-- Begin Table -->
+{% load static %}
+<div class="container py-4">
+<!--<input class="form-control" id="myInputIndex" type="text" placeholder="Search contracts repository..">-->
+      <h2>Contracts</h2>
+
+
+      <div class="table-responsive">
+      <table id="advancedSearchTable" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Contract Number</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Type</th>
+                 <th>Effective date</th>
+                 <th>Expiration date</th>
+                <th>Funding</th>
+                 <th>Description</th>
+
+            </tr>
+        </thead>
+        <tbody>
+           {% for my_index_contracts in my_index_contracts %}
+            <tr>
+            <td><img src="{% static 'details_open.png' %}"></td>
+            <td>{{ my_index_contracts.contract_number }}</td>
+            <td>{{ my_index_contracts.title }}</td>
+            <td>{{ my_index_contracts.contract_status }}</td>
+            <td>{{ my_index_contracts.contract_type }}</td>
+            <td>{{ my_index_contracts.effective_date }}</td>
+            <td>{{ my_index_contracts.expiration_date }}</td>
+            <td>{{ my_index_contracts.current_funding }}</td>
+            <td>  <span style="
+                  display:inline-block;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  max-width: 13ch;">
+	          {{ my_index_contracts.short_description }}
+	        </span> </td>
+
+            </tr>
+           {% endfor %}
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+
+               <th>Contract Number</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Type</th>
+                 <th>Effective date</th>
+                 <th>Expiration date</th>
+                <th>Funding</th>
+                <th>Description</th>
+                 <th></th>
+
+            </tr>
+        </tfoot>
+     </table>
+
+      </div>
+
+
+</div>
+
+
+<!-- End Table -->
+
+    <script>
+
+
+ $(document).ready(function() {
+	 var table = $('#advancedSearchTable').DataTable( {
+		dom: 'Bfrtip',
+		 buttons: [
+		{
+		        extend: 'collection',
+                className: 'custom-html-collection',
+                buttons: [
+                    '<h3>Export</h3>',
+                    'copy', 'csv', 'excel', 'pdf', 'print',
+                    '<h3 class="not-top-heading">Column Visibility</h3>',
+                    'colvis'
+                ]
+         },
+        ],
+	} );
+
+} );
+
+$('#advancedSearchTable tbody').on('click', 'td.details-control', function () {
+    var tr = $(this).parents('tr');
+    var row = table.row( tr );
+
+    if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+    }
+    else {
+        // Open this row (the format() function would return the data to be shown)
+        if(row.child() && row.child().length)
+        {
+            row.child.show();
+        }
+        else {
+            row.child( format(row.data()) ).show();
+        }
+        tr.addClass('shown');
+    }
+} );
+</script>

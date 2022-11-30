@@ -1,0 +1,82 @@
+
+<!-- Begin Table -->
+<div class="container py-4">
+<!--<input class="form-control" id="myInputIndex" type="text" placeholder="Search contracts repository..">-->
+     <h1>Contracts</h1>
+	<input class="form-control" id="myInput" type="text" placeholder="Search contracts repository..">
+	<br />
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Contract No.</th>
+					<th>Title</th>
+					<th>Effective Date</th>
+					<th>Expiration Date</th>
+					<th>Status</th>
+					<th>Type</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody  id="myTable">
+			   {% for my_contract in my_index_contracts %}
+
+				<tr class="accordion-toggle" data-toggle="collapse"
+					data-target="#{{ my_contract.contract_number }}"}>
+					<td>{{ my_contract.contract_number }}</td>
+					<td>{{ my_contract.title }}</td>
+					<td> {{ my_contract.effective_date}} </td>
+					<td> {{ my_contract.expiration_date}} </td>
+ 					<td>{{ my_contract.contract_status }}</td>
+					<td>{{ my_contract.contract_type }}</td>
+					<td>
+						<td><a class="btn btn-info"  href="/email" ><iclass="icon-search icon-white">Email</i></a></td>
+						<td><a class="btn btn-info"  href="{% url 'contracts:pdf' my_contract.id %}"  target="_new">Report</a></td>
+						<td><a class="btn btn-info"  href="{% url 'contracts:detail' my_contract.id %}">Details</a></td>
+						<td><a class="btn btn-info"  href="{% url 'contracts:edit_contract' my_contract.id %}">Edit</a></td>
+						<td><a class="btn btn-info"  href="{% url 'contracts:delete_contract' my_contract.id %}">Delete</a></td>
+
+					</td>
+
+
+				</tr>
+
+					<tr>
+
+					<td colspan="3">
+								<div id="{{ my_contract.contract_number }}" class="collapse in">
+							- Office
+							{{ my_contract.office}}
+									<br />
+							- Prime PM
+							{{ my_contract.prime_pm}}
+									<br />
+							- Short Description
+							{{ my_contract.short_description|safe}}
+							</div>
+
+					</td>
+				</tr>
+
+
+  {% endfor %}
+
+			</tbody>
+		</table>
+
+</div>
+<!-- End Table -->
+   <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

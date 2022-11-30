@@ -1,0 +1,113 @@
+                         
+<h2 class="text-center mb-3">MY CONTRACTS:</h2>
+<!-- Begin Table -->
+<div class="container py-4">
+<!--<input class="form-control" id="myInputIndex" type="text" placeholder="Search contracts repository..">-->
+      <h2>Contracts</h2>
+
+
+      <div class="table-responsive">
+      <table id="my_contracts_table" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Contract Number</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Type</th>
+                 <th>Effective date</th>
+                 <th>Expiration date</th>
+                <th>Funding</th>
+                 <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for my_contract in my_contracts %}
+            <tr>
+            <td>{{ my_contract.contract_number }}</td>
+            <td>{{ my_contract.title }}</td>
+            <td>{{ my_contract.contract_status }}</td>
+            <td>{{ my_contract.contract_type }}</td>
+            <td>{{ my_contract.effective_date }}</td>
+            <td>{{ my_contract.expiration_date }}</td>
+            <td>{{ my_contract.current_funding }}</td>
+            <td>  <span style="
+                  display:inline-block;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  max-width: 13ch;">
+	          {{ my_contract.short_description }}
+	        </span> </td>
+
+                <!-- Action Buttons -->
+
+                <!-- Action Buttons -->
+
+
+            </tr>
+           {% endfor %}
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+               <th>Contract Number</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Type</th>
+                 <th>Effective date</th>
+                 <th>Expiration date</th>
+                <th>Funding</th>
+                <th>Description</th>
+            </tr>
+        </tfoot>
+     </table>
+
+      </div>
+
+
+</div>
+
+
+<!-- End Table -->
+
+    <script>
+
+    $(document).ready(function() {
+	$('#my_contracts_table').DataTable( {
+		dom: 'Bfrtip',
+		buttons: [
+		{
+		        extend: 'collection',
+		        className: 'custom-html-collection',
+                buttons: [
+                    '<h3>Export</h3>',
+                    'copy', 'csv', 'excel', 'pdf', 'print',
+                    '<h3 class="not-top-heading">Column Visibility</h3>',
+                    'colvis',
+
+                ]
+         },
+        ],
+        	} );
+} );
+
+
+ // Activate an inline edit on click of a table cell
+    $('#my_contracts_table').on( 'click', 'tbody td.row-edit', function (e) {
+        editor.inline( table.cells(this.parentNode, '*').nodes(), {
+            submitTrigger: this,
+            submitHtml: '<i class="fa fa-play"/>'
+        } );
+    } );
+
+    // Delete row
+    $('#my_contracts_table').on( 'click', 'tbody td.row-remove', function (e) {
+        editor.remove( this.parentNode, {
+            title: 'Delete record',
+            message: 'Are you sure you wish to delete this record?',
+            buttons: 'Delete'
+        } );
+    } );
+
+</script>

@@ -1,0 +1,87 @@
+{% extends "contracts/base.html" %}
+        
+{% block content %}
+                          
+<h2 class="text-center mb-3">MY CONTRACTS:</h2>
+<div class="row">
+
+
+  <div class="col">
+    <div class="container text-center p-3">
+ <input class="form-control" id="myInput" type="text" placeholder="Search..">
+<table class="table text-center">
+     <tbody id="myTable2">
+
+        <th>Contract#</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Short Description</th>
+         <th>Date Created</th>
+
+      <!--  <th>Document</th>-->
+
+             <th></th>
+
+                <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+     </tbody>
+</table>
+
+      <table class="table text-center">
+         <tbody id="myTable">
+
+        {% for my_contract in my_contracts %}
+
+        <tr>
+        <td>{{ my_contract.contract_number }}</td>
+        <td>{{ my_contract.title }}</td>
+        <td>{{ my_contract.contract_status }}</td>
+        <td>{{ my_contract.contract_type }}</td>
+        <td>
+            <span style="
+                  display:inline-block;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  max-width: 13ch;">
+	          {{ my_contract.short_description }}
+	        </span>
+        </td>
+        <td>{{ my_contract.created_date }}</td>
+
+      <!--  {% if my_contract.pdf_1%}
+        <td><a href="{{ my_contract.pdf_1.url }}" target="_new">{{ my_contract.pdf_1 }}</a></td>
+          {% else %}
+        <td></td>
+        {% endif %}-->
+        <td><a href="{{ contract.contract_award.url }}"  target="_new">  {% load static %} <img src="{% static "fileattached.png" %}" alt="files" />   </a></td>
+        <td><a class="btn btn-info"  href="{% url 'contracts:detail' my_contract.id %}">View</a></td>
+        <td><a class="btn btn-info"  href="{% url 'contracts:edit_contract' my_contract.id %}">Edit</a></td>
+        <td><a class="btn btn-info"  href="{% url 'contracts:delete_contract' my_contract.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+         </tbody>
+      </table>
+      <div class="container text-center">
+      <a class="btn btn-info"  href="{% url 'contracts:new_contract'%}">New Contract</a>
+      </div>
+    </div>
+  </div>
+</div>     
+
+      <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+{% endblock content %}

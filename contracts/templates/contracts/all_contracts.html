@@ -1,0 +1,150 @@
+{% extends "contracts/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{%block content%} 
+<!-- 'contract_status', 'contract_type', 'tag_type', 'contract_number'-->
+<div class="container c " style="width:500px;">
+<h1 class="text-dark">Contracts</h1>
+    <div class="form-group">
+        <div class="card card-body bg-light text-dark rounded" style="width:100%;">
+            <form method="get">
+                <div class="row ">
+                    <div class="col-md-4">
+                        {{ my_Filter.form.contract_status|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ my_Filter.form.contract_type|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ my_Filter.form.tag_type|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ my_Filter.form.contract_number|as_crispy_field }}
+                    </div>
+
+                    <div class="col-md-4 p-2">
+                        <button class="btn btn-info border-dark mt-4" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <br>
+        <br>
+    </div>
+</div> 
+
+<!--<div class="container">-->
+<!--<div class="row pb-4">-->
+<!--    <div class="col-12">-->
+<!--        <input type="text" name="searchbox" id="searchbox" class="filterinput form-control" placeholder="Search contract titles and tags...">-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="card card-body bg-light text-dark text-center p-3 ">
+{% for contract in all_contracts %}
+
+<div class="row">
+
+     <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Contract Profile for ( {{ contract.contract_number }}) </h5>
+        <p class="card-text"><b>Title:</b> {{ contract.title }}</p>
+         <p class="card-text"><b>Contract Type:</b> {{ contract.contract_type }}</p>
+          <p class="card-text"><b>Status:</b> {{ contract.contract_status }}</p>
+          <p class="card-text"><b>Tag:</b> {{ contract.tag_type }}</p>
+         <p class="card-text"><b>Company Name:</b> {{ contract.company_name }}</p>
+          <p class="card-text"><b>Contract#:</b> {{ contract.contract_number }}</p>
+          <p class="card-text"><b>Price:</b> $ {{ contract.funded|floatformat:2 }}</p>
+          <p class="card-text"><b>Tag:</b> {{ contract.tag_type }}, {{ contract.company_name }}</p>
+
+  <!--  {% if contract.main_photo%}
+        <p><img class="card-img-right img-thumbnail"  src="{{ contract.main_photo.url }}" width=300px height=200px style="max-height:200px" alt="connect">
+          {% else %}
+        <p><b>Main Photo:</b> </p>
+         {% endif %}
+
+    {% if contract.photo_1%}
+         <img class="card-img-right img-thumbnail" src="{{ contract.photo_1.url }}" width=300px height=200px style="max-height:200px" alt="connect"></p>
+          {% else %}
+        <p><b>Photo 1:</b> </p>
+         {% endif %}-->
+
+   {% if contract.contract_award%}
+       <p><b>Contract Award:</b> <a href="{{ contract.contract_award.url }}"  target="_new">  {% load static %} <img src="{% static "fileattached.png" %}" alt="files" />   </a> </p>
+          {% else %}
+        <p><b>Contract Award::</b> </p>
+        {% endif %}
+    {% if contract.contract_amendment%}
+       <p><b>Contract Amendment:</b> <a href="{{ contract.contract_amendment.url }}"  target="_new">  {% load static %} <img src="{% static "fileattached.png" %}" alt="files" />   </a></p>
+          {% else %}
+        <p><b>Contract Award::</b> </p>
+        {% endif %}
+    {% if contract.contract_renewal%}
+       <p><b>Contract Renewal:</b> <a href="{{ contract.contract_renewal.url }}"  target="_new">  {% load static %} <img src="{% static "fileattached.png" %}" alt="files" />   </a></p>
+          {% else %}
+        <p><b>Contract NDA::</b> </p>
+        {% endif %}
+     {% if contract.contract_nda%}
+       <p><b>Contract NDA:</b> <a href="{{ contract.contract_nda.url }}"  target="_new">  {% load static %} <img src="{% static "fileattached.png" %}" alt="files" />   </a></p>
+          {% else %}
+        <p><b>Contract NDA::</b> </p>
+        {% endif %}
+      <!-- <a href="{% url 'contracts:detail' contract.id %}" class="btn btn-primary">View Contract</a>-->
+
+
+                     <a href="{% url 'contracts:detail' contract.id %}">Details</a>
+            <span>·</span>
+                      <a href="{% url 'contracts:edit_contract' contract.id %}">Edit</a>
+                      <span>·</span>
+                    <a href=" {% url 'contracts:delete_contract' contract.id %}">Delete</a>
+
+          <span>·</span>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Contract Profile for ( {{ contract.contract_number }}) </h5>
+          <p class="card-text"><b>Short Description:</b>{{ contract.short_description|safe}}</p>
+
+                     <a href="{% url 'contracts:detail' contract.id %}">Details</a>
+            <span>·</span>
+                      <a href="{% url 'contracts:edit_contract' contract.id %}">Edit</a>
+                      <span>·</span>
+                    <a href=" {% url 'contracts:delete_contract' contract.id %}">Delete</a>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+  <!--<p><b>Title:</b> {{ contract.title }}</p>
+  <p><b>Contract Type:</b> {{ contract.contract_type }}</p>
+  <p><b>Status:</b> {{ contract.contract_status }}</p>
+  <p><b>Tag:</b> {{ contract.tag_type }}</p>
+  <p><b>Company Name:</b> {{ contract.company_name }}</p>
+  <p><b>Contract#:</b> {{ contract.contract_number }}</p>
+  <p><b>Price:</b> $ {{ contract.funded|floatformat:2 }}</p>
+  <p><b>Tag:</b> {{ contract.tag_type }}, {{ contract.company_name }}</p>
+   {% if contract.pdf_1%}
+       <p><b>Documents:</b> <a href="{{ contract.pdf_1.url }}" target="_new"> {{ contract.pdf_1.url }}</a></p>
+          {% else %}
+        <p><b>Documents:</b> </p>
+        {% endif %}
+
+  <p><b>Short Description:</b> {{ contract.short_description }}</p>
+  <p><b>SOW Summary:</b> {{ contract.sow_summary }}</p>
+  <p><b>Tasks Summary:</b> {{ contract.task_summary }}</p>
+
+  <ul><a class="btn btn-info border-dark" href="{% url 'contracts:detail' contract.id %}">View Contract</a></ul>-->
+  <hr>                 
+{% endfor %}                  
+</div>
+</div>
+
+{%endblock content%} 

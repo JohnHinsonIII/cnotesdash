@@ -1,0 +1,176 @@
+{% extends "contracts/base.html" %}
+
+{%block content%}
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">Contract Details </h1>
+            <!-- <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+             <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>-->
+        </div>
+    </div>
+    <HR>
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+
+                    <strong class="d-inline-block mb-2 text-primary">{{ detail.created_date }}</strong>
+                    <h3 class="mb-0">Title: {{ detail.title }}</h3>
+                    <div class="mb-1 text-muted">11/12/2022</div>
+                    <p><b>Title:</b> {{ detail.title }}</p>
+                    <p><b>Contract Type:</b> {{ detail.contract_type }}</p>
+                    <p><b>Status:</b> {{ detail.contract_status }}</p>
+                    <p><b>Tag:</b> {{ detail.tag_type }}</p>
+                    <p><b>Company Name:</b> {{ detail.company_name }}</p>
+                    <p><b>Contract#:</b> {{ detail.contract_number }}</p>
+                    <p><b>Funded:</b> $ {{ detail.funded|floatformat:2 }}</p>
+                    <p><b>Tag:</b> {{ detail.tag_type }}, {{ detail.company_name }}</p>
+
+                    {% if user.is_authenticated %}
+                    <p><a href="{% url 'contracts:create_review' detail.id %}" class="btn btn-primary"> Add
+                        Review </a></p>
+                    {% endif %}
+
+
+                    <hr/>
+                    <h3>Reviews</h3>
+                    <ul class="list-group">
+                        {% for review in reviews %}
+                        <li class="list-group-item pb-3 pt-3"><h5 class="card-title"> Review by {{ review.user.username }}
+
+                        </h5> <h6 class="card-subtitle mb-2 text-muted"> {{ review.created_date }} </h6>
+                            <p class="card-text">{{ review.text |safe}}</p> {% if user.is_authenticated and user == review.user %}
+                            <a class="btn btn-primary me-2"
+                               href="{% url 'contracts:update_review' review.id %}">Update</a> <a class="btn btn-danger" href="{% url 'contracts:delete_review' review.id %}">Delete</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+            </div>
+
+
+            <!--  Display Review start-->
+
+
+            <!--  Display  Review End-->
+
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" aria-controls="home" aria-selected="true"
+                           href="#home">Contract Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#menu1">File Attachments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#menu2">Contract Award Documents</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-controls="home">
+
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-success">{{ detail.created_date }}</strong>
+                            <h3 class="mb-0">{{ detail.contract_number }}</h3>
+                            <div class="mb-1 text-muted">Nov 11</div>
+                            <h4 class="mb-0">Short Description</h4>
+                            <p class="mb-auto">{{ detail.short_description|safe}}</p>
+
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="menu1" role="tabpanel" aria-controls="profile">
+
+                        <!--  Review start-->
+
+
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+
+                    {% if user.is_authenticated %}
+                    <p><a href="{% url 'contracts:create_document' detail.id %}" class="btn btn-primary"> Add
+                        Document </a></p>
+                    {% endif %}
+
+
+                    <hr/>
+                    <h3>Documents</h3>
+                    <ul class="list-group"> {% for document in documents %}
+                        <li class="list-group-item pb-3 pt-3"><h5 class="card-title"> Document added by {{ document.user.username }}
+
+                        </h5> <h6 class="card-subtitle mb-2 text-muted"> {{ document.created_date }} </h6>
+                            <p class="card-text"><b>Document Type: </b>{{ document.document_type }}</p>
+                            <p class="card-text"><b>Title:</b> {{ document.title }}</p>
+                            <p class="card-text"><b>Tags:</b> {{ document.tag }}</p>
+
+                            {% if document.attach_file %}
+                                <p><b>File Attachment:</b><a href="{{ document.attach_file.url }}" target="_new"> {% load static %} <img src="{% static "fileattached.png" %}" alt="files" /> </a></p>
+                                {% else %}
+                                <p><b>File Attachment:</b></p>
+                                {% endif %}
+
+                            {% if user.is_authenticated and user == document.user %}
+                            <a class="btn btn-primary me-2"
+                               href="{% url 'contracts:update_document' document.id %}">Update</a> <a class="btn btn-danger" href="{% url 'contracts:delete_document' document.id %}">Delete</a>
+                            {% endif %}
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                            </div>
+                        </div>
+
+
+                        <!--  Review End-->
+                    </div>
+                    <div class="tab-pane fade" id="menu2" role="tabpanel" aria-controls="contact">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                {% if detail.contract_award%}
+                                <p><b>Contract Award:</b><a href="{{ detail.contract_award.url }}" target="_new"> {%load static %} <img src="{% static "fileattached.png" %}" alt="files" /> </a></p>
+                                {% else %}
+                                <p><b>Contract Award::</b></p>
+                                {% endif %}
+                                {% if detail.contract_amendment%}
+                                <p><b>Contract Amendment:</b> <a href="{{ detail.contract_amendment.url }}" target="_new"> {% load static %} <img src="{% static "fileattached.png" %}" alt="files" /> </a></p>
+                                {% else %}
+                                <p><b>Contract Award::</b></p>
+                                {% endif %}
+                                {% if detail.contract_renewal%}<p><b>Contract Renewal:</b> <a
+                                    href="{{ detail.contract_renewal.url }}" target="_new"> {% load static %} <img src="{% static "fileattached.png" %}" alt="files" /> </a></p>
+                                {% else %}
+                                <p><b>Contract NDA::</b></p>
+                                {% endif %}
+                                {% if detail.contract_nda%}
+                                <p><b>Contract NDA:</b> <a href="{{ detail.contract_nda.url }}" target="_new"> {% load static %} <img src="{% static "fileattached.png" %}" alt="files" /> </a></p>
+                                {% else %}
+                                <p><b>Contract NDA::</b></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</main>
+{% endblock %}

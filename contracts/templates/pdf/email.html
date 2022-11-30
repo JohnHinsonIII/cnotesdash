@@ -1,0 +1,14 @@
+<div>
+   <form action="" method="post">
+                {% csrf_token %}
+                <ul class="contactList">
+                    <li id="name" class="contact">{{ form.name }}</li>
+                    <li id="company" class="contact">{{ form.company }}</li>
+                    <li id="email" class="contact">{{ form.from_email }}</li>
+                    <li id="phone" class="contact">{{ form.phone }}</li>
+                    <li id="subject" class="contact">{{ form.subject }}</li>
+                    <li id="message" class="contact">{{ form.message }}</li>
+                </ul>
+                <input id=submit type="submit" value="Submit">
+            </form>
+        </div>

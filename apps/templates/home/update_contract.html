@@ -1,0 +1,358 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Billing {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+
+                    <div class="col-xl-6">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-lg-0 mb-4">
+                        <div class="card mt-4">
+                            <div class="card-header pb-0 p-3">
+                                <div class="row">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <h6 class="mb-0">Edit Contract Information</h6>
+                                    </div>
+                                    {#                                  <div class="col-6 text-end">#}
+                                    {#                                     <button type="submit" class="btn bg-gradient-dark mb-0">Save Contract</button>#}
+                                    {#                                  </div>#}
+                                </div>
+                            </div>
+                            <div class="card-body p-3">
+                                <div class="row">
+
+                                    <div class="container" style="width: 50%;">
+                                        <form action="{% url 'update_contract' contract.id %}" method='post'
+                                              enctype="multipart/form-data">
+                                            {% csrf_token %}
+
+                                              <div class="container text-center p-3">
+                                                <button type="submit" class="btn bg-gradient-dark mb-0">Save Contract
+                                                </button>
+                                            </div>
+
+
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#home" type="button"
+                                                            role="tab" aria-controls="home" aria-selected="true">General
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="summary-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#summary" type="button"
+                                                            role="tab" aria-controls="summary" aria-selected="false">
+                                                        Summary
+                                                    </button>
+                                                </li>
+                                                <!--<li class="nav-item" role="presentation">
+                                                  <button class="nav-link" id="financials-tab" data-bs-toggle="tab" data-bs-target="#financials" type="button" role="tab" aria-controls="financials" aria-selected="false">Financials</button>
+                                                </li>-->
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#contact" type="button"
+                                                            role="tab" aria-controls="contact" aria-selected="false">
+                                                        Contact
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="document-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#document" type="button"
+                                                            role="tab" aria-controls="document" aria-selected="false">
+                                                        Documents
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="myTabContent">
+
+                                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                                     aria-labelledby="home-tab">
+                                                    <br>
+                                                    <details>
+                                                        <summary>Description</summary>
+                                                        <p>Epcot is a theme park at Walt Disney World Resort featuring
+                                                            exciting attractions, international
+                                                            pavilions, award-winning fireworks and seasonal special
+                                                            events.</p>
+                                                    </details>
+                                                    <br>
+                                                    <div class="row">
+
+                                                        <div class="col">{{ form.tag_type|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.contract_type|as_crispy_field }}</div>
+
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">{{ form.contract_number|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.title|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.company_name|as_crispy_field }}</div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+
+                                                        <div class="col">{{ form.contract_status|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.current_year|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.created_date|as_crispy_field }}</div>
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">{{ form.funded|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.total_funding|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.current_funding|as_crispy_field }}</div>
+                                                    </div>
+
+                                                    <div class="row">
+
+
+                                                        <div class="col">
+                                                            <!--                           <div class="col">-->
+                                                            <!--                            <label for="effective_date">Effective Date:</label>-->
+                                                            <!--                           </div>-->
+
+                                                            {{ form.effective_date|as_crispy_field }}
+
+                                                        </div>
+                                                        <div class="col">
+                                                            <!--                             <div class="col">-->
+                                                            <!--                              <label for="expiration_date">Expiration Date:</label>-->
+                                                            <!--                             </div>-->
+                                                            <!--                             <input type="date" />-->
+                                                            {{ form.expiration_date|as_crispy_field }}
+                                                        </div>
+                                                        <div class="col">
+                                                            <!--                              <div class="col">-->
+                                                            <!--                              <label for="renewal_date">Renewal Date:</label>-->
+                                                            <!--                              </div>-->
+                                                            <!--                              <input type="date" />-->
+                                                            {{ form.renewal_date|as_crispy_field }}
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="tab-pane fade" id="summary" role="tabpanel"
+                                                     aria-labelledby="summary-tab">
+                                                    <br>
+                                                    <details>
+                                                        <summary>Description</summary>
+                                                        <p>Epcot is a theme park at Walt Disney World Resort featuring
+                                                            exciting attractions, international
+                                                            pavilions, award-winning fireworks and seasonal special
+                                                            events.</p>
+                                                    </details>
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col">{{ form.media }}</div>
+                                                        <div class="col">{{ form.short_description|as_crispy_field }}</div>
+
+                                                    </div>
+
+
+                                                </div>
+                                                <!--<div class="tab-pane fade" id="financials" role="tabpanel" aria-labelledby="financials-tab">
+
+                        <div class="row">
+                               <div class="col">{{ form.funded|as_crispy_field }}</div>
+                               <div class="col">{{ form.total_funding|as_crispy_field }}</div>
+                                <div class="col">{{ form.current_funding|as_crispy_field }}</div>
+                           </div>
+
+
+
+            </div>-->
+                                                <div class="tab-pane fade" id="contact" role="tabpanel"
+                                                     aria-labelledby="contact-tab">
+                                                    <br>
+                                                    <details>
+                                                        <summary>Description</summary>
+                                                        <p>Epcot is a theme park at Walt Disney World Resort featuring
+                                                            exciting attractions, international
+                                                            pavilions, award-winning fireworks and seasonal special
+                                                            events.</p>
+                                                    </details>
+                                                    <br>
+
+
+                                                    <div class="row">
+                                                        <div class="col">{{ form.prime|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.prime_pm|as_crispy_field }}</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">{{ form.sub|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.sub_pm|as_crispy_field }}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">{{ form.office|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.division|as_crispy_field }}</div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">{{ form.city|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.state|as_crispy_field }}</div>
+                                                        <div class="col">{{ form.zipcode|as_crispy_field }}</div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">{{ form.contact_email|as_crispy_field }}</div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="tab-pane fade" id="document" role="tabpanel"
+                                                     aria-labelledby="document-tab">
+                                                    <br>
+                                                    <details>
+                                                        <summary>Description</summary>
+                                                        <p>Epcot is a theme park at Walt Disney World Resort featuring
+                                                            exciting attractions, international
+                                                            pavilions, award-winning fireworks and seasonal special
+                                                            events.</p>
+                                                    </details>
+                                                    <br>
+
+
+                                                    <div class="row">
+                                                        <div class="col-6">{{ form.main_logo|as_crispy_field }}</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="container text-center p-3">
+                                                <button type="submit" class="btn bg-gradient-dark mb-0">Save Contract
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-md-0 mb-4">
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% comment %} <div class="col-lg-4">
+        <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <div class="row">
+              <div class="col-6 d-flex align-items-center">
+                <h6 class="mb-0">Attachments</h6>
+              </div>
+              <div class="col-6 text-end">
+{#                <button class="btn btn-outline-primary btn-sm mb-0">View All</button>#}
+                <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add Attachment</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-3 pb-0">
+            <ul class="list-group">
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex flex-column">
+                  <h6 class="mb-1 text-dark font-weight-bold text-sm">March, 01, 2020</h6>
+                  <span class="text-xs">#MS-415646</span>
+                </div>
+                <div class="d-flex align-items-center text-sm">
+                  $180
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                </div>
+              </li>
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex flex-column">
+                  <h6 class="text-dark mb-1 font-weight-bold text-sm">February, 10, 2021</h6>
+                  <span class="text-xs">#RV-126749</span>
+                </div>
+                <div class="d-flex align-items-center text-sm">
+                  $250
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                </div>
+              </li>
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex flex-column">
+                  <h6 class="text-dark mb-1 font-weight-bold text-sm">April, 05, 2020</h6>
+                  <span class="text-xs">#FB-212562</span>
+                </div>
+                <div class="d-flex align-items-center text-sm">
+                  $560
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                </div>
+              </li>
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex flex-column">
+                  <h6 class="text-dark mb-1 font-weight-bold text-sm">June, 25, 2019</h6>
+                  <span class="text-xs">#QW-103578</span>
+                </div>
+                <div class="d-flex align-items-center text-sm">
+                  $120
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                </div>
+              </li>
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
+                <div class="d-flex flex-column">
+                  <h6 class="text-dark mb-1 font-weight-bold text-sm">March, 01, 2019</h6>
+                  <span class="text-xs">#AR-803481</span>
+                </div>
+                <div class="d-flex align-items-center text-sm">
+                  $300
+                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>{% endcomment %}
+        </div>
+
+        {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}

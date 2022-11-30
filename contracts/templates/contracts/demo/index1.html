@@ -1,0 +1,214 @@
+{% extends "contracts/base.html" %}
+{% load static %}
+{%block content%}
+
+<main>
+
+
+  <div class="container py-4">
+
+ <!-- Widget 1 -->
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Total Revenue</h5>
+                                        <span class="h2 font-weight-bold mb-0">${{ total_sales|default:0 }}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                            <i class="ni ni-active-40"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">
+                      Revenue in the last 12mo
+                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 2 -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Peek Revenue</h5>
+                                        <span class="h2 font-weight-bold mb-0">${{ peek_sale|default:0 }}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                            <i class="ni ni-chart-pie-35"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                                    <span class="text-nowrap">
+                                        Highest transaction (last 12mo)
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 3 -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Total Contracts</h5>
+                                        <span class="h2 font-weight-bold mb-0">{{ total_contracts|default:0 }}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                            <i class="ni ni-money-coins"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">
+                      Contracts in the last 12mo
+                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 4 -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Best
+                                            Month: {{ best_month.month_name|default:'-' }}</h5>
+                                        <span class="h2 font-weight-bold mb-0">${{ best_month.funded|default:0 }}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                            <i class="ni ni-chart-bar-32"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">
+                      Best Month in revenue in the last 12mo
+                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- End -->
+
+    <!--<div class="p-5 mb-4 bg-info rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">CONTRACT FINDER</h1>
+        <p class="col-md-8 fs-4">Find the latest contracts, amendments, notes, and more.</p>
+        <p class="col-md-8 fs-8">  Ever feel overwhelmed, disorganized, or confused when it comes to contract management? We've been there! Cue a headache saver ... contract cloud repository, also sometimes called a document repository.
+
+A cloud contract repository system makes managing contracts easy. Contract repository can be defined as a single place to store documents and contracts. Contract repository solutions for small companies, medium-sized, large, and enterprise companies are all available with customized pricing plans.
+
+No matter which plan you choose, ContractSafe’s secure digital document storage is sure to streamline the entire contract management process.</p>
+
+        <button class="btn btn-dark btn-lg" type="button"><a class="text-light" href="{% url 'contracts:all_contracts' %}">Explore </a></button>
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h2>Search and Research Faster</h2>
+          <p>11Find resources, previous work history, list of contracts, and more!.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark border rounded-3">
+          <h2>Unlimited Contracts</h2>
+          <p>Create an account and start adding contracts immediately. No limits! No fees!</p>
+        </div>
+      </div>
+    </div>-->
+
+
+
+     <h1 class="visually-hidden">Features examples</h1>
+
+  <div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom">Columns with icons</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
+        </div>
+        <h3 class="fs-2">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link d-inline-flex align-items-center">
+          Call to action
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+        </a>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
+        </div>
+        <h3 class="fs-2">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link d-inline-flex align-items-center">
+          Call to action
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+        </a>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+        </div>
+        <h3 class="fs-2">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link d-inline-flex align-items-center">
+          Call to action
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+   
+    <footer class="pt-3 mt-4 text-muted border-top">
+         <p>&copy; 2022 IHRC, Inc. All rights reserved.</p>
+     
+    </footer>
+
+  </div>
+</main>
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+    <script>
+        SalesChart({{ contracts_month_report|safe }}, {{ contracts_month_report_labels|safe }});
+        ContractChart({{ contracts_month_report|safe }}, {{ contracts_month_report_labels|safe }});
+    </script>
+
+{% endblock javascripts %}
+
+{%endblock content%}  

@@ -1,0 +1,70 @@
+
+{% extends "contracts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+     <h4 class="text-center alert alert-info">Add Attachments</h4>
+      <form action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+       <!-- {{form.as_p}}-->
+          <div class="col-sm-7 offset-1">
+                     <div class="col">{{ form.contract_type|as_crispy_field }}</div>
+                      <div class="col">{{ form.short_description|as_crispy_field }}</div>
+                     <div class="col">{{ form.contracts_id|as_crispy_field }}</div>
+                <div class="col">{{ form.attach_file|as_crispy_field }}</div>
+{#                <div class="col">{{ form.created_date|as_crispy_field }}</div>#}
+                  </div>
+ <div class = "container text-center p-3">
+        <input type="submit"  class="btn btn-info" value="Add">
+    </div>
+      </form>
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h4 class="text-center alert alert-info"> Show Attachment Information</h4>
+    {% if attachments %}
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Contract Type</th>
+              <th scope="col">Short Description</th>
+              <th scope="col">Related</th>
+              <th scope="col">Attachment</th>
+                  <th scope="col">Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
+          {% for at in attachments %}
+
+
+            <tr>
+              <th scope="row">{{at.id}}</th>
+
+              <td>{{at.contract_type}}</td>
+              <td>{{at.short_description}}</td>
+              <td>{{at.contracts_id}}</td>
+                 {% if at.attach_file%}
+                 <td> <a href="{{ at.attach_file.url }}"  target="_new">  {% load static %} <img src="{% static "fileattached.png" %}" alt="files" />   </a></td>
+                  {% else %}
+                <td> </td>
+                {% endif %}
+              <td>
+                  <a href="" class="btn btn-info">Edit</a>
+                  <form action="" method="POST" class="d-inline"> {% csrf_token %}
+                      <input type="submit" class="btn btn-danger" value="Delete">
+                  </form>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    {% else %}
+        <h4 class="text-center alert alert-info">"No Data</h4>
+    {% endif %}
+    </div>
+
+</div>
+{% endblock content %}
